@@ -2,14 +2,17 @@ package com.iiitd.hostel.backend;
 
 import com.googlecode.objectify.annotation.Entity;
 import com.googlecode.objectify.annotation.Id;
+import com.googlecode.objectify.annotation.Index;
 
 /**
  * Created by irani_r on 8/25/2014.
  */
 @Entity
-public class Quote {
+public class Quote
+{
     @Id
     Long id;
+    @Index
     String who;
     String what;
 
