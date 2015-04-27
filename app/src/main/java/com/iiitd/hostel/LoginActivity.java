@@ -6,6 +6,7 @@ import android.app.PendingIntent;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.IntentSender.SendIntentException;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.support.v4.app.FragmentActivity;
 import android.util.Log;
@@ -27,7 +28,6 @@ import com.google.android.gms.common.api.Scope;
 import com.google.android.gms.plus.People.LoadPeopleResult;
 import com.google.android.gms.plus.Plus;
 import com.google.android.gms.plus.model.people.Person;
-import com.iiitd.hostel.R;
 
 import org.apache.http.HttpResponse;
 import org.apache.http.NameValuePair;
@@ -159,17 +159,20 @@ public class LoginActivity extends FragmentActivity implements
 
         if (savedInstanceState != null)
         {
-            mSignInProgress = savedInstanceState
-                    .getInt(SAVED_PROGRESS, STATE_DEFAULT);
+            mSignInProgress = savedInstanceState.getInt(SAVED_PROGRESS, STATE_DEFAULT);
         }
 
         mGoogleApiClient = buildGoogleApiClient();
     }
 
-    private GoogleApiClient buildGoogleApiClient() {
+    private GoogleApiClient buildGoogleApiClient()
+    {
         // When we build the GoogleApiClient we specify where connected and
         // connection failed callbacks should be returned, which Google APIs our
         // app uses and which OAuth 2.0 scopes our app requests.
+        String scopes = "oauth2:email " + Plus.SCOPE_PLUS_LOGIN;
+
+
         GoogleApiClient.Builder builder = new GoogleApiClient.Builder(this)
                 .addConnectionCallbacks(this)
                 .addOnConnectionFailedListener(this)
@@ -282,13 +285,43 @@ public class LoginActivity extends FragmentActivity implements
         // Retrieve some profile information to personalize our app for the user.
         Person currentUser = Plus.PeopleApi.getCurrentPerson(mGoogleApiClient);
 
-        mStatus.setText(String.format(getResources().getString(R.string.signed_in_as),currentUser.getDisplayName()));
+        //mStatus.setText(String.format(getResources().getString(R.string.signed_in_as),currentUser.getDisplayName()));
+        mStatus.setText(String.format(getResources().getString(R.string.signed_in_as),Plus.AccountApi.getAccountName(mGoogleApiClient)));
 
-        Plus.PeopleApi.loadVisible(mGoogleApiClient, null)
-                .setResultCallback(this);
+        Plus.PeopleApi.loadVisible(mGoogleApiClient, null).setResultCallback(this);
 
         // Indicate that the sign in process is complete.
         mSignInProgress = STATE_DEFAULT;
+
+
+        if(Plus.AccountApi.getAccountName(mGoogleApiClient).contains("iiitd"))
+        {
+            mStatus.setText("Valid Id");
+            final String PREFS_NAME = "MyPrefsFile";
+            SharedPreferences settings = getSharedPreferences(PREFS_NAME, 0);
+            //Log.d(w,"reached before if");
+            if (settings.getBoolean("my_first_time", true))
+            {
+                settings.edit().putBoolean("my_first_time", false).commit();
+                Intent intent = new Intent(this, StudentRegisterActivity.class);
+                startActivity(intent);
+
+            }
+        }
+        else
+        {
+            mStatus.setText("InValid Email-Id. Signing Out.........");
+//            if (mGoogleApiClient.isConnected())
+//            {
+//                Plus.AccountApi.clearDefaultAccount(mGoogleApiClient);
+//                mGoogleApiClient.disconnect();
+//            }
+//            onSignedOut();
+        }
+
+
+
+
     }
 
     /* onConnectionFailed is called when our Activity could not connect to Google
