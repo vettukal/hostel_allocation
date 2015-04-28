@@ -147,4 +147,37 @@ public class StudentEndpoint {
         return ofy().load().type(Student.class).id(id).now();
         //or return ofy().load().type(Student.class).filter("id",id).first.now();
     }
+
+
+    @ApiMethod(name = "listStudentUsingEmail")
+    public CollectionResponse<Student> listStudentUsingEmail(@Nullable @Named("cursor") String cursorString,
+                                                         @Nullable @Named("count") Integer count,@Named("emailID") String emailID)
+    {
+        Query<Student> query = ofy().load().type(Student.class).filter("emailID", emailID);
+        if (count != null) query.limit(count);
+        if (cursorString != null && cursorString != "") {
+            query = query.startAt(Cursor.fromWebSafeString(cursorString));
+        }
+
+        List<Student> records = new ArrayList<Student>();
+        QueryResultIterator<Student> iterator = query.iterator();
+        int num = 0;
+        while (iterator.hasNext()) {
+            records.add(iterator.next());
+            if (count != null) {
+                num++;
+                if (num == count) break;
+            }
+        }
+
+        //Find the next cursor
+        if (cursorString != null && cursorString != "") {
+            Cursor cursor = iterator.getCursor();
+            if (cursor != null) {
+                cursorString = cursor.toWebSafeString();
+            }
+        }
+        return CollectionResponse.<Student>builder().setItems(records).setNextPageToken(cursorString).build();
+    }
+
 }

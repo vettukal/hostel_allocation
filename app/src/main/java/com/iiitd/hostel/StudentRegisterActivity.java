@@ -200,7 +200,7 @@ public class StudentRegisterActivity extends ActionBarActivity implements Adapte
         Log.d("sixth edit Text",((EditText)findViewById(R.id.editText6)).getText()+"");
         Log.d("seventh edit Text",((EditText)findViewById(R.id.editText7)).getText()+"");
 
-        new EndpointStudent(this).execute();
+        new EndpointStudent(this).execute(s);
 
 
     }
