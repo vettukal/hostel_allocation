@@ -15,7 +15,9 @@ public class QuoteActivity extends ActionBarActivity {
         setContentView(R.layout.activity_quote);
     }
     public void getQuotes(View v) {
-        new EndpointQuote(this).execute();
+
+        //new EndpointQuote(this).execute();
+        new EndpointStudent(this).execute();
     }
 
     @Override
