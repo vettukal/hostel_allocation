@@ -63,9 +63,10 @@ public class QuoteEndpoint {
      */
     @ApiMethod(name = "listQuote")
     public CollectionResponse<Quote> listQuote(@Nullable @Named("cursor") String cursorString,
-                                               @Nullable @Named("count") Integer count) {
-
-        Query<Quote> query = ofy().load().type(Quote.class);
+                                               @Nullable @Named("count") Integer count)
+    {
+        //Quote record = findRecordWho(who);
+       Query<Quote> query = ofy().load().type(Quote.class);
         if (count != null) query.limit(count);
         if (cursorString != null && cursorString != "") {
             query = query.startAt(Cursor.fromWebSafeString(cursorString));
@@ -143,8 +144,46 @@ public class QuoteEndpoint {
     }
 
     //Private method to retrieve a <code>Quote</code> record
-    private Quote findRecord(Long id) {
+    private Quote findRecord(Long id)
+    {
         return ofy().load().type(Quote.class).id(id).now();
         //or return ofy().load().type(Quote.class).filter("id",id).first.now();
+    }
+
+    private List<Quote> findRecordWho(String who)
+    {
+        return ofy().load().type(Quote.class).filter("who", who).list();
+        //or return ofy().load().type(Quote.class).filter("id",id).first.now();
+    }
+
+    @ApiMethod(name = "searchQuoteUsingWho")
+    public CollectionResponse<Quote> searchQuoteUsingWho(@Nullable @Named("cursor") String cursorString,
+                                                         @Nullable @Named("count") Integer count,@Named("who") String who)
+    {
+        Query<Quote> query = ofy().load().type(Quote.class).filter("who", who);
+        if (count != null) query.limit(count);
+        if (cursorString != null && cursorString != "") {
+            query = query.startAt(Cursor.fromWebSafeString(cursorString));
+        }
+
+        List<Quote> records = new ArrayList<Quote>();
+        QueryResultIterator<Quote> iterator = query.iterator();
+        int num = 0;
+        while (iterator.hasNext()) {
+            records.add(iterator.next());
+            if (count != null) {
+                num++;
+                if (num == count) break;
+            }
+        }
+
+        //Find the next cursor
+        if (cursorString != null && cursorString != "") {
+            Cursor cursor = iterator.getCursor();
+            if (cursor != null) {
+                cursorString = cursor.toWebSafeString();
+            }
+        }
+        return CollectionResponse.<Quote>builder().setItems(records).setNextPageToken(cursorString).build();
     }
 }
