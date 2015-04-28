@@ -7,6 +7,8 @@ package com.iiitd.hostel;
 import android.content.Context;
 import android.os.AsyncTask;
 import android.util.Log;
+import android.util.Pair;
+import android.widget.Toast;
 
 import com.google.api.client.extensions.android.http.AndroidHttp;
 import com.google.api.client.extensions.android.json.AndroidJsonFactory;
@@ -19,7 +21,7 @@ import java.io.IOException;
 import java.util.Collections;
 import java.util.List;
 
-public class EndpointStudent extends AsyncTask<Student , Void, List<Student>> {
+public class EndpointStudent extends AsyncTask<Void, Void, List<Student>> {
     private static StudentApi myApiService = null;
     private Context context;
 
@@ -28,8 +30,7 @@ public class EndpointStudent extends AsyncTask<Student , Void, List<Student>> {
     }
 
     @Override
-    protected List<Student> doInBackground(Student... params)
-    {
+    protected List<Student> doInBackground(Void... params) {
         if(myApiService == null) {  // Only do this once
             StudentApi.Builder builder = null;
             int test =0; // appengine server.
@@ -63,9 +64,7 @@ public class EndpointStudent extends AsyncTask<Student , Void, List<Student>> {
             student.setName("vincent-phone");
             student.setAddress("kentuky");
 
-            Student s=params[0];
-
-            Student retStudent = myApiService.insertStudent(s).execute();
+            Student retStudent = myApiService.insertStudent(student).execute();
             Log.d("vince","inserting a student from device: "+retStudent.getName());
             // -----------------------
 

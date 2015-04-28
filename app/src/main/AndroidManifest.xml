@@ -3,7 +3,6 @@
     package="com.iiitd.hostel" >
 
     <uses-permission android:name="android.permission.INTERNET" />
-    <uses-permission android:name="android.permission.GET_ACCOUNTS" />
 
     <application
         android:allowBackup="true"
@@ -31,10 +30,6 @@
         <activity
             android:name=".QuoteActivity"
             android:label="@string/title_activity_quote" >
-        </activity>
-        <activity
-            android:name=".StudentRegisterActivity"
-            android:label="@string/title_activity_student_register" >
         </activity>
     </application>
 

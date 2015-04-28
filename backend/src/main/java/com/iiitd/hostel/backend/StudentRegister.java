@@ -1,7 +1,7 @@
 package com.iiitd.hostel.backend;
 
 /**
- * Created by vince on 4/27/2015.
+ * Created by Ashish on 4/20/2015.
  */
 
 import com.googlecode.objectify.annotation.Entity;
@@ -9,11 +9,9 @@ import com.googlecode.objectify.annotation.Id;
 
 import java.util.Date;
 
-/**
- * Created by irani_r on 8/25/2014.
- */
 @Entity
-public class Student {
+public class StudentRegister
+{
     @Id
     Long id;
     String name;
@@ -30,12 +28,12 @@ public class Student {
     String branch;
     String emailId;
 
-    public Long getId() {
-        return id;
+    public String getCity() {
+        return city;
     }
 
-    public void setId(Long id) {
-        this.id = id;
+    public void setCity(String city) {
+        this.city = city;
     }
 
     public String getName() {
@@ -52,14 +50,6 @@ public class Student {
 
     public void setAddress(String address) {
         this.address = address;
-    }
-
-    public String getCity() {
-        return city;
-    }
-
-    public void setCity(String city) {
-        this.city = city;
     }
 
     public String getState() {
@@ -141,4 +131,20 @@ public class Student {
     public void setEmailId(String emailId) {
         this.emailId = emailId;
     }
+
+    public Long getId() {
+        return id;
+    }
+
+    public void setId(Long id) {
+        this.id = id;
+    }
+
+
+
+
+
+
+
+
 }

@@ -68,8 +68,7 @@ public class QuoteEndpoint {
         //Quote record = findRecordWho(who);
        Query<Quote> query = ofy().load().type(Quote.class);
         if (count != null) query.limit(count);
-        if (cursorString != null && cursorString != "")
-        {
+        if (cursorString != null && cursorString != "") {
             query = query.startAt(Cursor.fromWebSafeString(cursorString));
         }
 
@@ -101,15 +100,14 @@ public class QuoteEndpoint {
      * @return The object to be added.
      */
     @ApiMethod(name = "insertQuote")
-    public Quote insertQuote(Quote quote) throws ConflictException
-    {
+    public Quote insertQuote(Quote quote) throws ConflictException {
         //If if is not null, then check if it exists. If yes, throw an Exception
         //that it is already present
         if (quote.getId() != null) {
-        if (findRecord(quote.getId()) != null) {
-            throw new ConflictException("Object already exists");
+            if (findRecord(quote.getId()) != null) {
+                throw new ConflictException("Object already exists");
+            }
         }
-    }
         //Since our @Id field is a Long, Objectify will generate a unique value for us
         //when we use put
         ofy().save().entity(quote).now();
