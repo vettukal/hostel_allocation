@@ -30,6 +30,16 @@ public class Student {
     String branch;
     String emailId;
 
+    public Double getDistance() {
+        return distance;
+    }
+
+    public void setDistance(Double distance) {
+        this.distance = distance;
+    }
+
+    Double distance;
+
     public Long getId() {
         return id;
     }

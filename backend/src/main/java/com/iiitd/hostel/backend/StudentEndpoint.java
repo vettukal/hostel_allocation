@@ -63,7 +63,7 @@ public class StudentEndpoint {
      */
     @ApiMethod(name = "listStudent")
     public CollectionResponse<Student> listStudent(@Nullable @Named("cursor") String cursorString,
-                                               @Nullable @Named("count") Integer count) {
+                                                   @Nullable @Named("count") Integer count) {
 
         Query<Student> query = ofy().load().type(Student.class);
         if (count != null) query.limit(count);
