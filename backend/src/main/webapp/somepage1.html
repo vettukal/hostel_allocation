@@ -7,11 +7,24 @@
       function makeRequest() { // delete the student word below and then check
         gapi.client.studentApi.listStudent().execute(function(resp) {
             console.log(resp);
+			var buffer = "";
+			var obj = resp;
+			var itemarr = obj.items;
+			var etags = obj.etag;
+			console.log(itemarr);
+			console.log(etags);
+			$.each(itemarr, function(key,value) {
+				buffer += "<li> address:"+value.address+ "<br>branch:"+value.branch+"<br>city:"+value.city+"<br>contact Number:"+ value.contactNumber+"</li>";
+				console.log(value.address);
+			}); 
+			
+			
 			 $.each(resp, function(index, val){ 
 
 				for(var i=0; i < val.length; i++){
 					var item = val[i];
 					console.log(item.branch);
+					//buffer += item.branch;
 				}	 
 			$('ul').html(buffer);
 			});
@@ -50,5 +63,11 @@ alert('inserting new element');
 <div id="ul">
 
 </div>
+
+<ul>
+<li> hi how are you </li>
+<li> this is a nice place </li>
+</ul>
+
 </body>
 </html>
