@@ -1,13 +1,18 @@
 package com.iiitd.hostel;
 
 import android.content.res.Resources;
+import android.util.Log;
 
 import com.google.api.client.extensions.android.http.AndroidHttp;
 import com.google.api.client.extensions.android.json.AndroidJsonFactory;
 import com.google.api.client.googleapis.services.AbstractGoogleClientRequest;
 import com.google.api.client.googleapis.services.GoogleClientRequestInitializer;
+import com.google.api.client.json.Json;
 import com.iiitd.hostel.backend.studentApi.StudentApi;
 import com.iiitd.hostel.backend.studentApi.model.Student;
+
+import org.json.JSONArray;
+import org.json.JSONObject;
 
 import java.io.BufferedReader;
 import java.io.IOException;
@@ -63,19 +68,22 @@ public class StudentConnector {
         // while inserting student first we have to calculate the distance between home and iiitd
         // This can be done using the html code that was there.
         // for this a new function is called with the student address
-        calculateDistance(student.getAddress());
+        int dist = calculateDistance(student.getAddress());
+        student.setDistance((double) dist);
         return myApiService.insertStudent(student).execute();
     }
 
-    private void calculateDistance(String address) {
+    public int calculateDistance(String address) {
         // First of all the spaces has to converted to the + sign
         // All double space to single space.
+        Log.d("vince StudentConnector","hello i am here to calc distance");
+        Log.d("vince studentconnector","address"+address);
         address = address.replace("  "," ");
         address = address.replace("\n"," ");
         address = address.replace(" ","+");
         String iiitd = "IIIT+Delhi+Okhla+Industrial+Estate+New+Delhi+Delhi";
         // now get the html response for this shit
-
+        int dist = 0;
         // example of query
         // https://maps.googleapis.com/maps/api/distancematrix/json?origins=Vancouver+BC&destinations=San+Francisco&mode=bicycling&language=en-US&key=AIzaSyBeWjt37zWHrkjLl8aL8unxOhQeLcnGUH4
 
@@ -88,10 +96,11 @@ public class StudentConnector {
         String buffer = "";
 
         try {
-            String source = "";
+            String source = address;
             String destination = iiitd;
-            String urlpath = "https://maps.googleapis.com/maps/api/distancematrix/json?origins="+source+"&destinations="+destination+"&mode=bicycling&language=en-US&key=AIzaSyBeWjt37zWHrkjLl8aL8unxOhQeLcnGUH4";
-            url = new URL("http://stackoverflow.com/");
+            String urlpath = "https://maps.googleapis.com/maps/api/distancematrix/json?origins="+source+"&destinations="+destination+"&language=en-US&key=AIzaSyBeWjt37zWHrkjLl8aL8unxOhQeLcnGUH4";
+            Log.d("vince urlPath",urlpath);
+            url = new URL(urlpath);
             is = url.openStream();  // throws an IOException
             br = new BufferedReader(new InputStreamReader(is));
 
@@ -111,6 +120,29 @@ public class StudentConnector {
             }
         }
 
+        try{
+            Log.d("vince studentConnector",buffer);
+            JSONObject jobj = new JSONObject(buffer);
+            Log.d("vince sc parsing",jobj.toString());
+            JSONArray arr = jobj.getJSONArray("rows");
+            Log.d("vince sc parsing arr:",arr.toString());
+            JSONObject aobj = arr.getJSONObject(0);
+            JSONArray elements = aobj.getJSONArray("elements");
+            Log.d("vince parsing elements",elements.toString());
+            JSONObject firstobjele = elements.getJSONObject(0);
+            JSONObject distance = firstobjele.getJSONObject("distance");
+            dist = distance.getInt("value");
+            Log.d("vince parsing int dist",dist+"");
+            //int meters = dist.getInt("value");
+
+            //Log.d("vince json parsing", ""+meters);
+
+
+        }
+        catch(Exception e){
+            Log.d("vince studentconnector "," exception occured");
+        }
+        return dist;
     }
 
     public Student updateStudent(Student student) throws Exception {

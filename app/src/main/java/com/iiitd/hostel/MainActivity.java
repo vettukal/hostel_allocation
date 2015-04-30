@@ -6,6 +6,8 @@ import android.support.v7.app.ActionBarActivity;
 import android.view.Menu;
 import android.view.MenuItem;
 
+import com.iiitd.hostel.backend.quoteApi.model.Quote;
+
 
 public class MainActivity extends ActionBarActivity
 {
@@ -19,7 +21,8 @@ public class MainActivity extends ActionBarActivity
         // adding to test the toast message of Google Endpoints.
         //new EndpointsAsyncTask().execute(new Pair<Context, String>(this, "Manfred"));
 
-        Intent intent = new Intent(this,LoginActivity.class);
+        //Intent intent = new Intent(this,LoginActivity.class);
+        Intent intent = new Intent(this,QuoteActivity.class);
         startActivity(intent);
     }
 

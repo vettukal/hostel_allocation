@@ -57,15 +57,19 @@ public class EndpointStudent extends AsyncTask<Student,Void, List<Student>> {
             myApiService = builder.build();
         }
 
+        Student student = new Student();
+        student.setAddress("rajasthan india");
+        StudentConnector sc = new StudentConnector(0);
+        sc.calculateDistance("rajasthan india");
         try {
             // Going to insert student in the APPengine
-            Student student = new Student();
-            student.setName("vincent-phone");
-            student.setAddress("kentuky");
+            //Student student = new Student();
+            //student.setName("vincent-phone");
+            //student.setAddress("kentuky");
 
-            Student s=params[0];
-            Student retStudent = myApiService.insertStudent(s).execute();
-            Log.d("vince","inserting a student from device: "+retStudent.getName());
+            //Student s=params[0];
+            //Student retStudent = myApiService.insertStudent(s).execute();
+            //Log.d("vince","inserting a student from device: "+retStudent.getName());
             // -----------------------
 
 
