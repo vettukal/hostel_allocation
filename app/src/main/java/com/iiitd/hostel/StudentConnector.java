@@ -9,7 +9,12 @@ import com.google.api.client.googleapis.services.GoogleClientRequestInitializer;
 import com.iiitd.hostel.backend.studentApi.StudentApi;
 import com.iiitd.hostel.backend.studentApi.model.Student;
 
+import java.io.BufferedReader;
 import java.io.IOException;
+import java.io.InputStream;
+import java.io.InputStreamReader;
+import java.net.MalformedURLException;
+import java.net.URL;
 import java.util.List;
 
 import javax.annotation.Nullable;
@@ -54,7 +59,58 @@ public class StudentConnector {
     }
 
     public Student insertStudent(Student student) throws Exception {
+
+        // while inserting student first we have to calculate the distance between home and iiitd
+        // This can be done using the html code that was there.
+        // for this a new function is called with the student address
+        calculateDistance(student.getAddress());
         return myApiService.insertStudent(student).execute();
+    }
+
+    private void calculateDistance(String address) {
+        // First of all the spaces has to converted to the + sign
+        // All double space to single space.
+        address = address.replace("  "," ");
+        address = address.replace("\n"," ");
+        address = address.replace(" ","+");
+        String iiitd = "IIIT+Delhi+Okhla+Industrial+Estate+New+Delhi+Delhi";
+        // now get the html response for this shit
+
+        // example of query
+        // https://maps.googleapis.com/maps/api/distancematrix/json?origins=Vancouver+BC&destinations=San+Francisco&mode=bicycling&language=en-US&key=AIzaSyBeWjt37zWHrkjLl8aL8unxOhQeLcnGUH4
+
+
+
+        URL url;
+        InputStream is = null;
+        BufferedReader br;
+        String line;
+        String buffer = "";
+
+        try {
+            String source = "";
+            String destination = iiitd;
+            String urlpath = "https://maps.googleapis.com/maps/api/distancematrix/json?origins="+source+"&destinations="+destination+"&mode=bicycling&language=en-US&key=AIzaSyBeWjt37zWHrkjLl8aL8unxOhQeLcnGUH4";
+            url = new URL("http://stackoverflow.com/");
+            is = url.openStream();  // throws an IOException
+            br = new BufferedReader(new InputStreamReader(is));
+
+            while ((line = br.readLine()) != null) {
+                System.out.println(line);
+                buffer += line;
+            }
+        } catch (MalformedURLException mue) {
+            mue.printStackTrace();
+        } catch (IOException ioe) {
+            ioe.printStackTrace();
+        } finally {
+            try {
+                if (is != null) is.close();
+            } catch (IOException ioe) {
+                // nothing to see here
+            }
+        }
+
     }
 
     public Student updateStudent(Student student) throws Exception {
