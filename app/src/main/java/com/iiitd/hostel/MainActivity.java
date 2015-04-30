@@ -1,25 +1,25 @@
 package com.iiitd.hostel;
 
-import android.content.Context;
 import android.content.Intent;
-import android.support.v7.app.ActionBarActivity;
 import android.os.Bundle;
-import android.util.Pair;
+import android.support.v7.app.ActionBarActivity;
 import android.view.Menu;
 import android.view.MenuItem;
 
 
-public class MainActivity extends ActionBarActivity {
+public class MainActivity extends ActionBarActivity
+{
 
     @Override
-    protected void onCreate(Bundle savedInstanceState) {
+    protected void onCreate(Bundle savedInstanceState)
+    {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
         // adding to test the toast message of Google Endpoints.
         //new EndpointsAsyncTask().execute(new Pair<Context, String>(this, "Manfred"));
 
-        Intent intent = new Intent(this,QuoteActivity.class);
+        Intent intent = new Intent(this,StudentRegisterActivity.class);
         startActivity(intent);
     }
 

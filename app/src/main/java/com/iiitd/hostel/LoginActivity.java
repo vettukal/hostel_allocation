@@ -27,7 +27,6 @@ import com.google.android.gms.common.api.Scope;
 import com.google.android.gms.plus.People.LoadPeopleResult;
 import com.google.android.gms.plus.Plus;
 import com.google.android.gms.plus.model.people.Person;
-import com.iiitd.hostel.R;
 
 import org.apache.http.HttpResponse;
 import org.apache.http.NameValuePair;
@@ -284,11 +283,15 @@ public class LoginActivity extends FragmentActivity implements
 
         mStatus.setText(String.format(getResources().getString(R.string.signed_in_as),currentUser.getDisplayName()));
 
-        Plus.PeopleApi.loadVisible(mGoogleApiClient, null)
-                .setResultCallback(this);
+        Plus.PeopleApi.loadVisible(mGoogleApiClient, null).setResultCallback(this);
 
         // Indicate that the sign in process is complete.
         mSignInProgress = STATE_DEFAULT;
+
+
+
+
+
     }
 
     /* onConnectionFailed is called when our Activity could not connect to Google
