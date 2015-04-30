@@ -1,0 +1,54 @@
+<html>
+<head>
+    <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.11.2/jquery.min.js"></script>
+    <script>
+      
+
+      function makeRequest() { // delete the student word below and then check
+        gapi.client.studentApi.listStudent().execute(function(resp) {
+            console.log(resp);
+			 $.each(resp, function(index, val){ 
+
+				for(var i=0; i < val.length; i++){
+					var item = val[i];
+					console.log(item.branch);
+				}	 
+			$('ul').html(buffer);
+			});
+        });
+      }
+
+      function init() {
+	  // This the root for the appengine
+        var ROOT = 'https://concise-lambda-87311.appspot.com/_ah/api';
+		gapi.client.load('studentApi', 'v1', function() {
+			makeRequest();
+		}, ROOT);
+      }
+    </script>
+    <script src="https://apis.google.com/js/client.js?onload=init"></script>
+</head>
+<body>
+<button onclick="myFunction()">Click me</button>
+
+<p id="demo"></p>
+
+<script>
+function myFunction() {
+alert('inserting new element');
+    gapi.client.studentApi.insertStudent({
+ "itemId": 421,
+ "quantity": 3,
+ "what": "odomos1",
+ "who": "anurag"
+}).execute(function(resp) {
+        console.log(resp);
+    });
+}
+</script>
+
+<div id="ul">
+
+</div>
+</body>
+</html>
