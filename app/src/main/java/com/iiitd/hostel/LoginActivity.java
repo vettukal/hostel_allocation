@@ -6,6 +6,7 @@ import android.app.PendingIntent;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.IntentSender.SendIntentException;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.support.v4.app.FragmentActivity;
 import android.util.Log;
@@ -287,6 +288,32 @@ public class LoginActivity extends FragmentActivity implements
 
         // Indicate that the sign in process is complete.
         mSignInProgress = STATE_DEFAULT;
+
+
+        if(Plus.AccountApi.getAccountName(mGoogleApiClient).contains("iiitd"))
+        {
+            mStatus.setText("Valid Id");
+            final String PREFS_NAME = "MyPrefsFile";
+            SharedPreferences settings = getSharedPreferences(PREFS_NAME, 0);
+            //Log.d(w,"reached before if");
+            if (settings.getBoolean("my_first_time", true))
+            {
+                settings.edit().putBoolean("my_first_time", false).commit();
+                Intent intent = new Intent(this, StudentRegisterActivity.class);
+                startActivity(intent);
+
+            }
+        }
+        else
+        {
+            mStatus.setText("InValid Email-Id. Signing Out.........");
+//            if (mGoogleApiClient.isConnected())
+//            {
+//                Plus.AccountApi.clearDefaultAccount(mGoogleApiClient);
+//                mGoogleApiClient.disconnect();
+//            }
+//            onSignedOut();
+        }
 
 
 

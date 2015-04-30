@@ -19,7 +19,7 @@ public class MainActivity extends ActionBarActivity
         // adding to test the toast message of Google Endpoints.
         //new EndpointsAsyncTask().execute(new Pair<Context, String>(this, "Manfred"));
 
-        Intent intent = new Intent(this,StudentRegisterActivity.class);
+        Intent intent = new Intent(this,LoginActivity.class);
         startActivity(intent);
     }
 
