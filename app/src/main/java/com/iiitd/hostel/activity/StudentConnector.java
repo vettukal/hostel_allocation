@@ -1,4 +1,4 @@
-package com.iiitd.hostel;
+package com.iiitd.hostel.activity;
 
 import android.content.res.Resources;
 import android.util.Log;
