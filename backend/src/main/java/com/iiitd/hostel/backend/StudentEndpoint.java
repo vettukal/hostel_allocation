@@ -65,7 +65,8 @@ public class StudentEndpoint {
     public CollectionResponse<Student> listStudent(@Nullable @Named("cursor") String cursorString,
                                                    @Nullable @Named("count") Integer count) {
 
-        Query<Student> query = ofy().load().type(Student.class);
+        //Query<Student> query = ofy().load().type(Student.class);
+        Query<Student> query = ofy().load().type(Student.class).order("distance");
         if (count != null) query.limit(count);
         if (cursorString != null && cursorString != "") {
             query = query.startAt(Cursor.fromWebSafeString(cursorString));
