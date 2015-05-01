@@ -1,4 +1,4 @@
-package com.iiitd.hostel.activity;
+package com.iiitd.hostel;
 
 import android.content.Intent;
 import android.os.Bundle;
@@ -6,13 +6,11 @@ import android.support.v7.app.ActionBarActivity;
 import android.view.Menu;
 import android.view.MenuItem;
 
-import com.iiitd.hostel.R;
+import com.iiitd.hostel.backend.quoteApi.model.Quote;
 
 
 public class MainActivity extends ActionBarActivity
 {
-
-
 
     @Override
     protected void onCreate(Bundle savedInstanceState)
@@ -26,8 +24,6 @@ public class MainActivity extends ActionBarActivity
         Intent intent = new Intent(this,LoginActivity.class);
         //Intent intent = new Intent(this,QuoteActivity.class);
         startActivity(intent);
-
-
     }
 
 

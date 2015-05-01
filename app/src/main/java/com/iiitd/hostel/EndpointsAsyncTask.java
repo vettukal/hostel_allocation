@@ -1,4 +1,4 @@
-package com.iiitd.hostel.activity;
+package com.iiitd.hostel;
 
 import android.content.Context;
 import android.os.AsyncTask;

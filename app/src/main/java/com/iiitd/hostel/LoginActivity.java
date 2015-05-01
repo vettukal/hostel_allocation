@@ -1,4 +1,4 @@
-package com.iiitd.hostel.activity;
+package com.iiitd.hostel;
 
 import android.app.AlertDialog;
 import android.app.Dialog;
@@ -28,7 +28,6 @@ import com.google.android.gms.common.api.Scope;
 import com.google.android.gms.plus.People.LoadPeopleResult;
 import com.google.android.gms.plus.Plus;
 import com.google.android.gms.plus.model.people.Person;
-import com.iiitd.hostel.R;
 
 import org.apache.http.HttpResponse;
 import org.apache.http.NameValuePair;
@@ -301,14 +300,8 @@ public class LoginActivity extends FragmentActivity implements
             {
                 settings.edit().putBoolean("my_first_time", false).commit();
                 Intent intent = new Intent(this, StudentRegisterActivity.class);
-                intent.putExtra("emailId",Plus.AccountApi.getAccountName(mGoogleApiClient));
                 startActivity(intent);
 
-            }
-            else
-            {
-                Intent intent=new Intent(this,MainThemeActivity.class);
-                startActivity(intent);
             }
         }
         else
