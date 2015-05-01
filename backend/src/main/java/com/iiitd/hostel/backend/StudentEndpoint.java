@@ -29,7 +29,7 @@ import static com.googlecode.objectify.ObjectifyService.ofy;
  */
 @Api(
         name = "studentApi",
-        version = "v1",
+        version = "v2",
         resource = "student",
         namespace = @ApiNamespace(
                 ownerDomain = "backend.hostel.iiitd.com",
@@ -66,7 +66,7 @@ public class StudentEndpoint {
                                                    @Nullable @Named("count") Integer count) {
 
         //Query<Student> query = ofy().load().type(Student.class);
-        Query<Student> query = ofy().load().type(Student.class).order("distance");
+        Query<Student> query = ofy().load().type(Student.class).order("-distance");
         if (count != null) query.limit(count);
         if (cursorString != null && cursorString != "") {
             query = query.startAt(Cursor.fromWebSafeString(cursorString));

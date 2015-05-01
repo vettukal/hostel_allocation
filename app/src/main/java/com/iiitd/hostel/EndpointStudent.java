@@ -57,17 +57,22 @@ public class EndpointStudent extends AsyncTask<Student,Void, List<Student>> {
             myApiService = builder.build();
         }
 
-        Student student = new Student();
-        student.setAddress("rajasthan india");
-        StudentConnector sc = new StudentConnector(0);
-        sc.calculateDistance("rajasthan india");
+
         try {
             // Going to insert student in the APPengine
             //Student student = new Student();
             //student.setName("vincent-phone");
             //student.setAddress("kentuky");
 
-            //Student s=params[0];
+            Student s=params[0];
+            StudentConnector sc1 = new StudentConnector(0);
+            try{
+                sc1.insertStudent(s);
+            }
+            catch (Exception e){
+                e.printStackTrace();
+            }
+
             //Student retStudent = myApiService.insertStudent(s).execute();
             //Log.d("vince","inserting a student from device: "+retStudent.getName());
             // -----------------------
@@ -84,7 +89,7 @@ public class EndpointStudent extends AsyncTask<Student,Void, List<Student>> {
         Log.d("vince","inside the post execute");
         Log.d("vince",result.size()+": size of the result");
         for(Student stud : result){
-            Log.d("vince",stud.getName());
+            Log.d("vince endpointstudent",stud.getName());
         }
     }
 }
