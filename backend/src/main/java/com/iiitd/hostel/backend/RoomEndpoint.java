@@ -28,52 +28,53 @@ import static com.googlecode.objectify.ObjectifyService.ofy;
  * DO NOT deploy this code unchanged as part of a real application to real users.
  */
 @Api(
-        name = "quoteApi",
+        name = "roomApi",
         version = "v1",
-        resource = "quote",
+        resource = "room",
         namespace = @ApiNamespace(
                 ownerDomain = "backend.hostel.iiitd.com",
                 ownerName = "backend.hostel.iiitd.com",
                 packagePath = ""
         )
 )
-public class QuoteEndpoint {
 
-    private static final Logger logger = Logger.getLogger(QuoteEndpoint.class.getName());
+public class RoomEndpoint {
+
+    private static final Logger logger = Logger.getLogger(RoomEndpoint.class.getName());
 
     private static final int DEFAULT_LIST_LIMIT = 20;
 
     static {
         // Typically you would register this inside an OfyServive wrapper. See: https://code.google.com/p/objectify-appengine/wiki/BestPractices
-        ObjectifyService.register(Quote.class);
+        ObjectifyService.register(Room.class);
     }
 
     // Make sure to add this endpoint to your web.xml file if this is a web application.
 
-    private static final Logger LOG = Logger.getLogger(QuoteEndpoint.class.getName());
+    private static final Logger LOG = Logger.getLogger(RoomEndpoint.class.getName());
 
-    public QuoteEndpoint() {
+    public RoomEndpoint() {
     }
 
     /**
-     * Return a collection of quotes
+     * Return a collection of rooms
      *
-     * @param count The number of quotes
-     * @return a list of Quotes
+     * @param count The number of rooms
+     * @return a list of Rooms
      */
-    @ApiMethod(name = "listQuote")
-    public CollectionResponse<Quote> listQuote(@Nullable @Named("cursor") String cursorString,
-                                               @Nullable @Named("count") Integer count)
+    @ApiMethod(name = "listRoom")
+    public CollectionResponse<Room> listRoom(@Nullable @Named("cursor") String cursorString,
+                                             @Nullable @Named("count") Integer count)
     {
-        //Quote record = findRecordWho(who);
-        Query<Quote> query = ofy().load().type(Quote.class);
+        //Room record = findRecordWho(who);
+        Query<Room> query = ofy().load().type(Room.class);
         if (count != null) query.limit(count);
         if (cursorString != null && cursorString != "") {
             query = query.startAt(Cursor.fromWebSafeString(cursorString));
         }
 
-        List<Quote> records = new ArrayList<Quote>();
-        QueryResultIterator<Quote> iterator = query.iterator();
+        List<Room> records = new ArrayList<Room>();
+        QueryResultIterator<Room> iterator = query.iterator();
         int num = 0;
         while (iterator.hasNext()) {
             records.add(iterator.next());
@@ -90,84 +91,84 @@ public class QuoteEndpoint {
                 cursorString = cursor.toWebSafeString();
             }
         }
-        return CollectionResponse.<Quote>builder().setItems(records).setNextPageToken(cursorString).build();
+        return CollectionResponse.<Room>builder().setItems(records).setNextPageToken(cursorString).build();
     }
 
     /**
-     * This inserts a new <code>Quote</code> object.
+     * This inserts a new <code>Room</code> object.
      *
-     * @param quote The object to be added.
+     * @param room The object to be added.
      * @return The object to be added.
      */
-    @ApiMethod(name = "insertQuote")
-    public Quote insertQuote(Quote quote) throws ConflictException {
+    @ApiMethod(name = "insertRoom")
+    public Room insertRoom(Room room) throws ConflictException {
         //If if is not null, then check if it exists. If yes, throw an Exception
         //that it is already present
-        if (quote.getId() != null) {
-            if (findRecord(quote.getId()) != null) {
+        if (room.getId() != null) {
+            if (findRecord(room.getId()) != null) {
                 throw new ConflictException("Object already exists");
             }
         }
         //Since our @Id field is a Long, Objectify will generate a unique value for us
         //when we use put
-        ofy().save().entity(quote).now();
-        return quote;
+        ofy().save().entity(room).now();
+        return room;
     }
 
     /**
-     * This updates an existing <code>Quote</code> object.
+     * This updates an existing <code>Room</code> object.
      *
-     * @param quote The object to be added.
+     * @param room The object to be added.
      * @return The object to be updated.
      */
-    @ApiMethod(name = "updateQuote")
-    public Quote updateQuote(Quote quote) throws NotFoundException {
-        if (findRecord(quote.getId()) == null) {
-            throw new NotFoundException("Quote Record does not exist");
+    @ApiMethod(name = "updateRoom")
+    public Room updateRoom(Room room) throws NotFoundException {
+        if (findRecord(room.getId()) == null) {
+            throw new NotFoundException("Room Record does not exist");
         }
-        ofy().save().entity(quote).now();
-        return quote;
+        ofy().save().entity(room).now();
+        return room;
     }
 
     /**
-     * This deletes an existing <code>Quote</code> object.
+     * This deletes an existing <code>Room</code> object.
      *
      * @param id The id of the object to be deleted.
      */
-    @ApiMethod(name = "removeQuote")
-    public void removeQuote(@Named("id") Long id) throws NotFoundException {
-        Quote record = findRecord(id);
+    @ApiMethod(name = "removeRoom")
+    public void removeRoom(@Named("id") Long id) throws NotFoundException {
+        Room record = findRecord(id);
         if (record == null) {
-            throw new NotFoundException("Quote Record does not exist");
+            throw new NotFoundException("Room Record does not exist");
         }
         ofy().delete().entity(record).now();
     }
 
-    //Private method to retrieve a <code>Quote</code> record
-    private Quote findRecord(Long id)
+    //Private method to retrieve a <code>Room</code> record
+    private Room findRecord(Long id)
     {
-        return ofy().load().type(Quote.class).id(id).now();
-        //or return ofy().load().type(Quote.class).filter("id",id).first.now();
+        return ofy().load().type(Room.class).id(id).now();
+        //or return ofy().load().type(Room.class).filter("id",id).first.now();
     }
 
-    private List<Quote> findRecordWho(String who)
+    private List<Room> findRecordWho(String who)
     {
-        return ofy().load().type(Quote.class).filter("who", who).list();
-        //or return ofy().load().type(Quote.class).filter("id",id).first.now();
+        return ofy().load().type(Room.class).filter("who", who).list();
+        //or return ofy().load().type(Room.class).filter("id",id).first.now();
     }
 
-    @ApiMethod(name = "searchQuoteUsingWho")
-    public CollectionResponse<Quote> searchQuoteUsingWho(@Nullable @Named("cursor") String cursorString,
-                                                         @Nullable @Named("count") Integer count,@Named("who") String who)
+    @ApiMethod(name = "searchRoomUsingWho")
+    public CollectionResponse<Room> searchRoomUsingWho(@Nullable @Named("cursor") String cursorString,
+                                                       @Nullable @Named("count") Integer count,@Named("who") String who)
     {
-        Query<Quote> query = ofy().load().type(Quote.class).filter("who", who);
+        Query<Room> query = ofy().load().type(Room.class).filter("who", who);
         if (count != null) query.limit(count);
         if (cursorString != null && cursorString != "") {
             query = query.startAt(Cursor.fromWebSafeString(cursorString));
         }
 
-        List<Quote> records = new ArrayList<Quote>();
-        QueryResultIterator<Quote> iterator = query.iterator();
+        List<Room> records = new ArrayList<Room>();
+        QueryResultIterator<Room> iterator = query.iterator();
         int num = 0;
         while (iterator.hasNext()) {
             records.add(iterator.next());
@@ -184,6 +185,6 @@ public class QuoteEndpoint {
                 cursorString = cursor.toWebSafeString();
             }
         }
-        return CollectionResponse.<Quote>builder().setItems(records).setNextPageToken(cursorString).build();
+        return CollectionResponse.<Room>builder().setItems(records).setNextPageToken(cursorString).build();
     }
 }

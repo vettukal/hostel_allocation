@@ -6,6 +6,7 @@ package com.iiitd.hostel.backend;
 
 import com.googlecode.objectify.annotation.Entity;
 import com.googlecode.objectify.annotation.Id;
+import com.googlecode.objectify.annotation.Index;
 
 import java.util.Date;
 
@@ -28,7 +29,10 @@ public class Student {
     Integer pinCode;
     String rollNumber;
     String branch;
+    @Index
     String emailId;
+    @Index
+    Double distance;
 
     public Double getDistance() {
         return distance;
@@ -38,7 +42,7 @@ public class Student {
         this.distance = distance;
     }
 
-    Double distance;
+
 
     public Long getId() {
         return id;
