@@ -37,6 +37,19 @@
             android:name=".StudentRegisterActivity"
             android:label="@string/title_activity_student_register" >
         </activity>
+        <activity
+            android:name=".StudentHomeActivity"
+            android:label="@string/title_activity_student_home" >
+        </activity>
+        <activity
+            android:name=".ApplyActivity"
+            android:label="@string/title_activity_apply" >
+        </activity>
+        <activity
+            android:name=".EditDetailsActivity"
+            android:label="@string/title_activity_edit_details" >
+        </activity>
+
     </application>
 
 </manifest>

@@ -1,0 +1,110 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:orientation="vertical" android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:id="@+id/ApplyDetails"
+    tools:context="androidhive.info.materialdesign.activity.FriendsFragment">
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Apply Hostel"
+        android:id="@+id/apply"
+        android:textSize="20sp"
+        android:layout_alignParentTop="true"
+        android:layout_centerHorizontal="true" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Room Type"
+        android:id="@+id/textView"
+        android:layout_marginTop="83dp"
+        android:textSize="20sp"
+        android:layout_below="@+id/apply"
+        android:layout_toLeftOf="@+id/apply"
+        android:layout_toStartOf="@+id/apply" />
+
+    <Spinner
+        android:layout_width="120dp"
+        android:layout_height="wrap_content"
+        android:id="@+id/roomspinner"
+        android:layout_above="@+id/textView2"
+        android:layout_toRightOf="@+id/radioyes"
+        android:layout_toEndOf="@+id/radioyes"
+        android:layout_alignTop="@+id/textView" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Floor"
+        android:id="@+id/textView2"
+        android:textSize="20sp"
+        android:layout_marginTop="40dp"
+        android:layout_below="@+id/textView"
+        android:layout_alignLeft="@+id/textView"
+        android:layout_alignStart="@+id/textView" />
+
+    <Spinner
+        android:layout_width="120dp"
+        android:layout_height="wrap_content"
+        android:id="@+id/floorspinner"
+        android:layout_alignTop="@+id/textView2"
+        android:layout_toRightOf="@+id/radioyes"
+        android:layout_toEndOf="@+id/radioyes" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Clustering?"
+        android:id="@+id/textView3"
+        android:textSize="20sp"
+        android:layout_centerVertical="true"
+        android:layout_alignLeft="@+id/textView2"
+        android:layout_alignStart="@+id/textView2" />
+
+    <RadioButton
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Yes"
+        android:id="@+id/radioyes"
+        android:checked="true"
+        android:layout_centerVertical="true"
+        android:layout_centerHorizontal="true" />
+
+    <RadioButton
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="No"
+        android:id="@+id/radiono"
+        android:checked="false"
+        android:layout_alignTop="@+id/radioyes"
+        android:layout_alignRight="@+id/floorspinner"
+        android:layout_alignEnd="@+id/floorspinner" />
+
+    <Button
+        style="?android:attr/buttonStyleSmall"
+        android:layout_width="200dp"
+        android:layout_height="wrap_content"
+        android:text="Submit"
+        android:id="@+id/submitbut"
+        android:layout_marginTop="73dp"
+        android:layout_below="@+id/radioyes"
+        android:layout_alignLeft="@+id/textView3"
+        android:layout_alignStart="@+id/textView3"
+        android:layout_toLeftOf="@+id/radioyes"
+        android:layout_toStartOf="@+id/radioyes" />
+
+    <Button
+        style="?android:attr/buttonStyleSmall"
+        android:layout_width="200dp"
+        android:layout_height="wrap_content"
+        android:text="Clear"
+        android:id="@+id/clearbut"
+        android:layout_alignTop="@+id/submitbut"
+        android:layout_alignRight="@+id/floorspinner"
+        android:layout_alignEnd="@+id/floorspinner"
+        android:layout_toEndOf="@+id/radioyes"
+        android:layout_toRightOf="@+id/radioyes" />
+</RelativeLayout>

@@ -1,23 +1,24 @@
 package com.iiitd.hostel;
 
-        import android.os.Bundle;
-        import android.support.v7.app.ActionBarActivity;
-        import android.util.Log;
-        import android.view.View;
-        import android.view.ViewGroup;
-        import android.widget.AdapterView;
-        import android.widget.ArrayAdapter;
-        import android.widget.Button;
-        import android.widget.EditText;
-        import android.widget.Spinner;
-        import android.widget.TextView;
-        import android.widget.Toast;
+import android.content.Intent;
+import android.os.Bundle;
+import android.support.v7.app.ActionBarActivity;
+import android.util.Log;
+import android.view.View;
+import android.view.ViewGroup;
+import android.widget.AdapterView;
+import android.widget.ArrayAdapter;
+import android.widget.Button;
+import android.widget.EditText;
+import android.widget.Spinner;
+import android.widget.TextView;
+import android.widget.Toast;
 
-        import com.google.api.client.util.DateTime;
-        import com.iiitd.hostel.backend.studentApi.model.Student;
+import com.google.api.client.util.DateTime;
+import com.iiitd.hostel.backend.studentApi.model.Student;
 
-        import java.util.Calendar;
-        import java.util.Date;
+import java.util.Calendar;
+import java.util.Date;
 
 
 public class StudentRegisterActivity extends ActionBarActivity implements AdapterView.OnItemSelectedListener, View.OnClickListener {
@@ -33,11 +34,14 @@ public class StudentRegisterActivity extends ActionBarActivity implements Adapte
     ArrayAdapter<String> adapter_year;
     ArrayAdapter<String> adapter_degree;
     ArrayAdapter<String> adapter_state;
+    private String emailId;
     @Override
     protected void onCreate(Bundle savedInstanceState)
     {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_student_register);
+
+        emailId=getIntent().getStringExtra("emailId");
 
         s=new Student();
 
@@ -188,6 +192,8 @@ public class StudentRegisterActivity extends ActionBarActivity implements Adapte
         s.setDateOfBirth(datetime);
         Log.d("Date Format",s.getDateOfBirth()+"");
 
+        s.setEmailId(emailId);
+
 
 
         s.setRollNumber(((EditText) findViewById(R.id.editText7)).getText().toString());
@@ -201,6 +207,13 @@ public class StudentRegisterActivity extends ActionBarActivity implements Adapte
         Log.d("seventh edit Text",((EditText)findViewById(R.id.editText7)).getText()+"");
 
         new EndpointStudent(this).execute(s);
+
+        Intent intent=new Intent(this,StudentHomeActivity.class);
+        intent.putExtra("emailId",emailId);
+        Log.d("emailId in Register",emailId);
+        startActivity(intent);
+
+
 
 
     }

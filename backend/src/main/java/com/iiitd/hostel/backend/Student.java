@@ -34,6 +34,44 @@ public class Student {
     @Index
     Double distance;
 
+    String roomType;
+    Integer floorType;
+    boolean isApplied;
+    boolean isClusterOpted;
+
+
+
+    public boolean isApplied()
+    {
+        return this.isApplied;
+    }
+
+    public boolean isClusterOpted()
+    {
+        return this.isClusterOpted;
+    }
+
+
+    public void setRoomType(String roomType)
+    {
+        this.roomType=roomType;
+    }
+
+    public String getRoomType()
+    {
+        return this.roomType;
+    }
+
+    public void setFloorType(Integer floorType)
+    {
+        this.floorType=floorType;
+    }
+
+    public Integer getFloorType()
+    {
+        return this.floorType;
+    }
+
     public Double getDistance() {
         return distance;
     }

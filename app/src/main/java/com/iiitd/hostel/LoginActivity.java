@@ -300,9 +300,18 @@ public class LoginActivity extends FragmentActivity implements
             {
                 settings.edit().putBoolean("my_first_time", false).commit();
                 Intent intent = new Intent(this, StudentRegisterActivity.class);
+                intent.putExtra("emailId",Plus.AccountApi.getAccountName(mGoogleApiClient));
                 startActivity(intent);
 
             }
+            else
+            {
+                Intent intent=new Intent(this,StudentHomeActivity.class);
+                intent.putExtra("emailId",Plus.AccountApi.getAccountName(mGoogleApiClient));
+                startActivity(intent);
+            }
+
+
         }
         else
         {
