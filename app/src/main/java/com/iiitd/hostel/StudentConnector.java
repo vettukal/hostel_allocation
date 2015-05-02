@@ -1,13 +1,11 @@
 package com.iiitd.hostel;
 
-import android.content.res.Resources;
 import android.util.Log;
 
 import com.google.api.client.extensions.android.http.AndroidHttp;
 import com.google.api.client.extensions.android.json.AndroidJsonFactory;
 import com.google.api.client.googleapis.services.AbstractGoogleClientRequest;
 import com.google.api.client.googleapis.services.GoogleClientRequestInitializer;
-import com.google.api.client.json.Json;
 import com.iiitd.hostel.backend.studentApi.StudentApi;
 import com.iiitd.hostel.backend.studentApi.model.Student;
 
@@ -21,8 +19,6 @@ import java.io.InputStreamReader;
 import java.net.MalformedURLException;
 import java.net.URL;
 import java.util.List;
-
-import javax.annotation.Nullable;
 
 /**
  * Created by vince on 4/28/2015.
@@ -148,6 +144,12 @@ public class StudentConnector {
     public Student updateStudent(Student student) throws Exception {
         return myApiService.updateStudent(student).execute();
     }
+
+    public Student getStudent(String emailId) throws IOException
+    {
+        return myApiService.getStudentUsingEmailId(emailId).execute();
+    }
+
 
     public void removeStudent(Long id) throws Exception {
         myApiService.removeStudent(id).execute();

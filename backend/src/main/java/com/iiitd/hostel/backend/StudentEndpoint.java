@@ -29,7 +29,7 @@ import static com.googlecode.objectify.ObjectifyService.ofy;
  */
 @Api(
         name = "studentApi",
-        version = "v2",
+        version = "v3",
         resource = "student",
         namespace = @ApiNamespace(
                 ownerDomain = "backend.hostel.iiitd.com",
@@ -37,7 +37,8 @@ import static com.googlecode.objectify.ObjectifyService.ofy;
                 packagePath = ""
         )
 )
-public class StudentEndpoint {
+public class StudentEndpoint
+{
 
     private static final Logger logger = Logger.getLogger(StudentEndpoint.class.getName());
 
@@ -121,8 +122,10 @@ public class StudentEndpoint {
      * @return The object to be updated.
      */
     @ApiMethod(name = "updateStudent")
-    public Student updateStudent(Student student) throws NotFoundException {
-        if (findRecord(student.getId()) == null) {
+    public Student updateStudent(Student student) throws NotFoundException
+    {
+        if (findStudent(student.getEmailId()) == null)
+        {
             throw new NotFoundException("Student Record does not exist");
         }
         ofy().save().entity(student).now();
@@ -143,9 +146,33 @@ public class StudentEndpoint {
         ofy().delete().entity(record).now();
     }
 
+
+
+    @ApiMethod(name = "getStudentUsingEmailId")
+    public Student getStudentUsingEmailId(@Named("emailId") String emailId) throws NotFoundException
+    {
+        Student student=ofy().load().type(Student.class).filter("emailId",emailId).first().now();
+        // Student record = findRecord(id);
+        if (student == null)
+        {
+            throw new NotFoundException("Student Record does not exist");
+        }
+        else
+        {
+            return student;
+        }
+
+    }
+
     //Private method to retrieve a <code>Student</code> record
-    private Student findRecord(Long id) {
+    private Student findRecord(Long id)
+    {
         return ofy().load().type(Student.class).id(id).now();
         //or return ofy().load().type(Student.class).filter("id",id).first.now();
+    }
+
+    private Student findStudent(String emailId)
+    {
+        return ofy().load().type(Student.class).filter("emailId",emailId).first().now();
     }
 }

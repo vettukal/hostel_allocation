@@ -30,4 +30,7 @@
     <string name="configuration_error">Error: the value of WEB_CLIENT_ID or SERVER_BASE_URL is not  set correctly. This will cause errors when requesting a server auth code.</string>
     <string name="title_activity_quote">QuoteActivity</string>
     <string name="title_activity_student_register">StudentRegisterActivity</string>
+    <string name="title_activity_student_home">StudentHomeActivity</string>
+    <string name="title_activity_apply">ApplyActivity</string>
+    <string name="title_activity_edit_details">EditDetailsActivity</string>
 </resources>
