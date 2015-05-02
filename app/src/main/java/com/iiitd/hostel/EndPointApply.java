@@ -33,8 +33,8 @@ public class EndPointApply extends AsyncTask<ArrayList<String>,Void,Student>
             Student s=sc.getStudent(params[0].get(0));
             s.setRoomType(params[0].get(1));
             s.setFloorType(Integer.parseInt(params[0].get(2)));
-            s.setApplied(true);
-            s.setClusterOpted(false);
+            s.setIsApplied(true);
+            s.setIsClusterOpted(false);
 
             sc.updateStudent(s);
             Log.d("In apply endpoint",s.getName());

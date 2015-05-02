@@ -8,13 +8,15 @@ import com.googlecode.objectify.annotation.Entity;
 import com.googlecode.objectify.annotation.Id;
 import com.googlecode.objectify.annotation.Index;
 
+import java.util.Comparator;
 import java.util.Date;
 
 /**
  * Created by irani_r on 8/25/2014.
  */
 @Entity
-public class Student {
+public class Student implements Comparable<Student> {
+
     @Id
     Long id;
     String name;
@@ -33,23 +35,33 @@ public class Student {
     String emailId;
     @Index
     Double distance;
-
+    @Index
     String roomType;
+    @Index
     Integer floorType;
-    boolean isApplied;
-    boolean isClusterOpted;
 
-
-
-    public boolean isApplied()
-    {
-        return this.isApplied;
+    public Boolean getIsApplied() {
+        return isApplied;
     }
 
-    public boolean isClusterOpted()
-    {
-        return this.isClusterOpted;
+    public void setIsApplied(Boolean isApplied) {
+        this.isApplied = isApplied;
     }
+
+    public Boolean getIsClusterOpted() {
+        return isClusterOpted;
+    }
+
+    public void setIsClusterOpted(Boolean isClusterOpted) {
+        this.isClusterOpted = isClusterOpted;
+    }
+
+    @Index
+    Boolean isApplied;
+    Boolean isClusterOpted;
+
+
+
 
 
     public void setRoomType(String roomType)
@@ -192,5 +204,10 @@ public class Student {
 
     public void setEmailId(String emailId) {
         this.emailId = emailId;
+    }
+
+    @Override
+    public int compareTo(Student o) {
+        return (int) (o.distance - this.distance);
     }
 }
