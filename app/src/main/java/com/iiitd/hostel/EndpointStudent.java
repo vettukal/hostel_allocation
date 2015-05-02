@@ -1,4 +1,4 @@
-package com.iiitd.hostel.activity;
+package com.iiitd.hostel;
 
 /**
  * Created by vince on 4/27/2015.
