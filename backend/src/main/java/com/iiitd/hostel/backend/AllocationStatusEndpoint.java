@@ -37,7 +37,6 @@ import static com.googlecode.objectify.ObjectifyService.ofy;
                 packagePath = ""
         )
 )
-
 public class AllocationStatusEndpoint {
 
     private static final Logger logger = Logger.getLogger(AllocationStatusEndpoint.class.getName());
@@ -64,7 +63,7 @@ public class AllocationStatusEndpoint {
      */
     @ApiMethod(name = "listAllocationStatus")
     public CollectionResponse<AllocationStatus> listAllocationStatus(@Nullable @Named("cursor") String cursorString,
-                                               @Nullable @Named("count") Integer count)
+                                                                     @Nullable @Named("count") Integer count)
     {
         //AllocationStatus record = findRecordWho(who);
         Query<AllocationStatus> query = ofy().load().type(AllocationStatus.class);
@@ -159,7 +158,7 @@ public class AllocationStatusEndpoint {
 
     @ApiMethod(name = "searchAllocationStatusUsingWho")
     public CollectionResponse<AllocationStatus> searchAllocationStatusUsingWho(@Nullable @Named("cursor") String cursorString,
-                                                         @Nullable @Named("count") Integer count,@Named("who") String who)
+                                                                               @Nullable @Named("count") Integer count,@Named("who") String who)
     {
         Query<AllocationStatus> query = ofy().load().type(AllocationStatus.class).filter("who", who);
         if (count != null) query.limit(count);
