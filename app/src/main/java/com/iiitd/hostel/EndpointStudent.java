@@ -91,5 +91,8 @@ public class EndpointStudent extends AsyncTask<Student,Void, List<Student>> {
         for(Student stud : result){
             Log.d("vince endpointstudent",stud.getName());
         }
+
     }
+
+
 }

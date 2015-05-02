@@ -155,5 +155,9 @@ public class StudentConnector {
         myApiService.removeStudent(id).execute();
     }
 
+    public static int getKms(int meters){
+        return meters/1000;
+    }
+
 
 }
