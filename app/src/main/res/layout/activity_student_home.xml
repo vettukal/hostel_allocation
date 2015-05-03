@@ -7,44 +7,29 @@
     tools:context="com.iiitd.hostel.StudentHomeActivity">
 
     <Button
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Edit Details"
-        android:id="@+id/editDetail"
-        android:layout_marginTop="43dp"
-        android:layout_alignParentTop="true"
-        android:layout_alignLeft="@+id/apply"
-        android:layout_alignStart="@+id/apply"
-        android:layout_alignRight="@+id/button6"
-        android:layout_alignEnd="@+id/button6" />
-
-    <Button
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        android:layout_width="200dp"
+        android:layout_height="60dp"
         android:text="Apply"
         android:id="@+id/apply"
-        android:layout_marginTop="66dp"
-        android:layout_below="@+id/editDetail"
-        android:layout_alignRight="@+id/button6"
-        android:layout_alignEnd="@+id/button6" />
+        android:layout_marginTop="143dp"
+        android:layout_alignParentTop="true"
+        android:layout_alignLeft="@+id/logOut"
+        android:layout_alignStart="@+id/logOut" />
 
     <Button
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        android:layout_width="200dp"
+        android:layout_height="60dp"
         android:text="Status"
         android:id="@+id/status"
         android:layout_below="@+id/apply"
         android:layout_alignLeft="@+id/apply"
-        android:layout_alignStart="@+id/apply"
-        android:layout_marginTop="70dp"
-        android:layout_alignRight="@+id/editDetail"
-        android:layout_alignEnd="@+id/editDetail" />
+        android:layout_alignStart="@+id/apply" />
 
     <Button
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="New Button"
-        android:id="@+id/button6"
-        android:layout_alignParentBottom="true"
+        android:layout_width="200dp"
+        android:layout_height="60dp"
+        android:text="LOGOUT"
+        android:id="@+id/logOut"
+        android:layout_below="@+id/status"
         android:layout_centerHorizontal="true" />
 </RelativeLayout>

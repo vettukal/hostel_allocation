@@ -29,11 +29,11 @@ public class StudentHomeActivity extends ActionBarActivity implements View.OnCli
         Log.d("emailId in Home", emailId);
 
         apply=(Button)findViewById(R.id.apply);
-        editDetails=(Button)findViewById(R.id.editDetail);
+        //editDetails=(Button)findViewById(R.id.editDetail);
         status=(Button)findViewById(R.id.status);
 
         apply.setOnClickListener(this);
-        editDetails.setOnClickListener(this);
+        //editDetails.setOnClickListener(this);
         status.setOnClickListener(this);
 
 
@@ -75,13 +75,13 @@ public class StudentHomeActivity extends ActionBarActivity implements View.OnCli
             startActivity(intent);
 
         }
-        else if(view.getId() == R.id.editDetail)
+        /*else if(view.getId() == R.id.editDetail)
         {
             Intent intent=new Intent(this,EditDetailsActivity.class);
             intent.putExtra("emailId",emailId);
             startActivity(intent);
 
-        }
+        }*/
         else if(view.getId() == R.id.status)
         {
 

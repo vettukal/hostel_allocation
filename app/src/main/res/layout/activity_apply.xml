@@ -30,10 +30,10 @@
         android:layout_width="120dp"
         android:layout_height="wrap_content"
         android:id="@+id/roomspinner"
-        android:layout_above="@+id/textView2"
-        android:layout_toRightOf="@+id/radioyes"
-        android:layout_toEndOf="@+id/radioyes"
-        android:layout_alignTop="@+id/textView" />
+        android:layout_alignTop="@+id/textView"
+        android:layout_alignParentRight="true"
+        android:layout_alignParentEnd="true"
+        android:layout_alignBottom="@+id/textView" />
 
     <TextView
         android:layout_width="wrap_content"
@@ -51,8 +51,11 @@
         android:layout_height="wrap_content"
         android:id="@+id/floorspinner"
         android:layout_alignTop="@+id/textView2"
-        android:layout_toRightOf="@+id/radioyes"
-        android:layout_toEndOf="@+id/radioyes" />
+        android:layout_alignLeft="@+id/roomspinner"
+        android:layout_alignStart="@+id/roomspinner"
+        android:layout_alignParentRight="true"
+        android:layout_alignParentEnd="true"
+        android:layout_alignBottom="@+id/textView2" />
 
     <TextView
         android:layout_width="wrap_content"
@@ -64,47 +67,46 @@
         android:layout_alignLeft="@+id/textView2"
         android:layout_alignStart="@+id/textView2" />
 
-    <RadioButton
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Yes"
-        android:id="@+id/radioyes"
-        android:checked="true"
-        android:layout_centerVertical="true"
-        android:layout_centerHorizontal="true" />
+    <RadioGroup
+        android:layout_width="200dp"
+        android:layout_height="80dp"
+        android:id="@+id/radioGroup"
+        android:layout_alignTop="@+id/textView3"
+        android:layout_toEndOf="@+id/apply"
+        android:layout_toRightOf="@+id/apply">
 
-    <RadioButton
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="No"
-        android:id="@+id/radiono"
-        android:checked="false"
-        android:layout_alignTop="@+id/radioyes"
-        android:layout_alignRight="@+id/floorspinner"
-        android:layout_alignEnd="@+id/floorspinner" />
+        <RadioButton
+            android:layout_width="68dp"
+            android:layout_height="wrap_content"
+            android:text="Yes"
+            android:id="@+id/radioYes"
+            android:checked="false" />
+
+        <RadioButton
+            android:layout_width="68dp"
+            android:layout_height="wrap_content"
+            android:text="No"
+            android:id="@+id/radioNo"
+            android:checked="false" />
+
+    </RadioGroup>
 
     <Button
-        style="?android:attr/buttonStyleSmall"
-        android:layout_width="200dp"
+        android:layout_width="110dp"
         android:layout_height="wrap_content"
         android:text="Submit"
         android:id="@+id/submitbut"
-        android:layout_marginTop="73dp"
-        android:layout_below="@+id/radioyes"
-        android:layout_alignLeft="@+id/textView3"
-        android:layout_alignStart="@+id/textView3"
-        android:layout_toLeftOf="@+id/radioyes"
-        android:layout_toStartOf="@+id/radioyes" />
+        android:layout_marginTop="55dp"
+        android:layout_below="@+id/radioGroup"
+        android:layout_toRightOf="@+id/textView2"
+        android:layout_toEndOf="@+id/textView2" />
 
     <Button
-        style="?android:attr/buttonStyleSmall"
-        android:layout_width="200dp"
+        android:layout_width="110dp"
         android:layout_height="wrap_content"
         android:text="Clear"
         android:id="@+id/clearbut"
         android:layout_alignTop="@+id/submitbut"
-        android:layout_alignRight="@+id/floorspinner"
-        android:layout_alignEnd="@+id/floorspinner"
-        android:layout_toEndOf="@+id/radioyes"
-        android:layout_toRightOf="@+id/radioyes" />
+        android:layout_toRightOf="@+id/submitbut"
+        android:layout_toEndOf="@+id/submitbut" />
 </RelativeLayout>

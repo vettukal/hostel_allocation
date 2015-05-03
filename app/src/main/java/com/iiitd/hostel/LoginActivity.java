@@ -140,14 +140,14 @@ public class LoginActivity extends FragmentActivity implements
 
         mSignInButton = (Button) findViewById(R.id.sign_in_button);
         mSignOutButton = (Button) findViewById(R.id.sign_out_button);
-        mRevokeButton = (Button) findViewById(R.id.revoke_access_button);
-        mStatus = (TextView) findViewById(R.id.sign_in_status);
+        //mRevokeButton = (Button) findViewById(R.id.revoke_access_button);
+        //mStatus = (TextView) findViewById(R.id.sign_in_status);
         //mCirclesListView = (ListView) findViewById(R.id.circles_list);
 
         // Button listeners
         mSignInButton.setOnClickListener(this);
         mSignOutButton.setOnClickListener(this);
-        mRevokeButton.setOnClickListener(this);
+        //mRevokeButton.setOnClickListener(this);
 
         // CheckBox listeners
         //((CheckBox) findViewById(R.id.request_auth_code_checkbox)).setOnCheckedChangeListener(this);
@@ -212,7 +212,7 @@ public class LoginActivity extends FragmentActivity implements
             // between connected and not connected.
             switch (v.getId()) {
                 case R.id.sign_in_button:
-                    mStatus.setText(R.string.status_signing_in);
+                    //mStatus.setText(R.string.status_signing_in);
                     mSignInProgress = STATE_SIGN_IN;
                     mGoogleApiClient.connect();
                     break;
@@ -226,7 +226,7 @@ public class LoginActivity extends FragmentActivity implements
                     }
                     onSignedOut();
                     break;
-                case R.id.revoke_access_button:
+                /*case R.id.revoke_access_button:
                     // After we revoke permissions for the user with a GoogleApiClient
                     // instance, we must discard it and create a new one.
                     Plus.AccountApi.clearDefaultAccount(mGoogleApiClient);
@@ -237,7 +237,7 @@ public class LoginActivity extends FragmentActivity implements
                     Plus.AccountApi.revokeAccessAndDisconnect(mGoogleApiClient);
                     mGoogleApiClient = buildGoogleApiClient();
                     mGoogleApiClient.connect();
-                    break;
+                    break;*/
             }
         }
     }
@@ -274,7 +274,7 @@ public class LoginActivity extends FragmentActivity implements
         // Update the user interface to reflect that the user is signed in.
         mSignInButton.setEnabled(false);
         mSignOutButton.setEnabled(true);
-        mRevokeButton.setEnabled(true);
+        //mRevokeButton.setEnabled(true);
 
         // Hide the sign-in options, they no longer apply
         //findViewById(R.id.layout_server_auth).setVisibility(View.GONE);
@@ -282,7 +282,7 @@ public class LoginActivity extends FragmentActivity implements
         // Retrieve some profile information to personalize our app for the user.
         Person currentUser = Plus.PeopleApi.getCurrentPerson(mGoogleApiClient);
 
-        mStatus.setText(String.format(getResources().getString(R.string.signed_in_as),currentUser.getDisplayName()));
+        //mStatus.setText(String.format(getResources().getString(R.string.signed_in_as),currentUser.getDisplayName()));
 
         Plus.PeopleApi.loadVisible(mGoogleApiClient, null).setResultCallback(this);
 
@@ -292,7 +292,7 @@ public class LoginActivity extends FragmentActivity implements
 
         if(Plus.AccountApi.getAccountName(mGoogleApiClient).contains("iiitd"))
         {
-            mStatus.setText("Valid Id");
+            //mStatus.setText("Valid Id");
             final String PREFS_NAME = "MyPrefsFile";
             SharedPreferences settings = getSharedPreferences(PREFS_NAME, 0);
             //Log.d(w,"reached before if");
@@ -315,7 +315,8 @@ public class LoginActivity extends FragmentActivity implements
         }
         else
         {
-            mStatus.setText("InValid Email-Id. Signing Out.........");
+            Toast.makeText(this, "Sorry login with IIITD EmailId",Toast.LENGTH_LONG).show();
+            //mStatus.setText("InValid Email-Id. Signing Out.........");
 //            if (mGoogleApiClient.isConnected())
 //            {
 //                Plus.AccountApi.clearDefaultAccount(mGoogleApiClient);
@@ -459,12 +460,12 @@ public class LoginActivity extends FragmentActivity implements
         // Update the UI to reflect that the user is signed out.
         mSignInButton.setEnabled(true);
         mSignOutButton.setEnabled(false);
-        mRevokeButton.setEnabled(false);
+        //mRevokeButton.setEnabled(false);
 
         // Show the sign-in options
         //findViewById(R.id.layout_server_auth).setVisibility(View.VISIBLE);
 
-        mStatus.setText(R.string.status_signed_out);
+        //mStatus.setText(R.string.status_signed_out);
 
         //mCirclesList.clear();
         //mCirclesAdapter.notifyDataSetChanged();
@@ -489,7 +490,7 @@ public class LoginActivity extends FragmentActivity implements
                         public void onCancel(DialogInterface dialog) {
                             Log.e(TAG, "Google Play services resolution cancelled");
                             mSignInProgress = STATE_DEFAULT;
-                            mStatus.setText(R.string.status_signed_out);
+                            //mStatus.setText(R.string.status_signed_out);
                         }
                     });
         } else {
@@ -502,7 +503,7 @@ public class LoginActivity extends FragmentActivity implements
                                     Log.e(TAG, "Google Play services error could not be "
                                             + "resolved: " + mSignInError);
                                     mSignInProgress = STATE_DEFAULT;
-                                    mStatus.setText(R.string.status_signed_out);
+                                    //mStatus.setText(R.string.status_signed_out);
                                 }
                             }).create();
         }
