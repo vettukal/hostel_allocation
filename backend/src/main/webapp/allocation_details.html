@@ -27,7 +27,7 @@
 
       function makeRequest() 
       { // delete the student word below and then check
-        gapi.client.studentApi.listStudent().execute(function(resp) {
+        gapi.client.allocationStatusApi.listAllocationStatus().execute(function(resp) {
             console.log(resp);
 			var buffer = "";
 			var obj = resp;
@@ -37,8 +37,8 @@
 			console.log(etags);
 			$.each(itemarr, function(key,value)
 			{
-				buffer += "<li> address:"+value.address+ "<br>branch:"+value.branch+"<br>city:"+value.city+"<br>contact Number:"+ value.contactNumber+"</li>";
-				console.log(value.address);
+				buffer += "<li> emailId:"+value.emailId+ "<br>wing:"+value.wing+"<br>floor:"+value.floor+"<br>roomNumber:"+ value.roomNumber+"</li>";
+				console.log(value.emailId);
 			}); 
 			
 			
@@ -58,7 +58,7 @@
       function init() {
 	  // This the root for the appengine
         var ROOT = 'https://concise-lambda-87311.appspot.com/_ah/api';
-		gapi.client.load('studentApi', 'v3', function()
+		gapi.client.load('allocationStatusApi', 'v1', function()
 		 {
 			makeRequest();
 		}, ROOT);

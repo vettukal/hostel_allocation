@@ -13,7 +13,8 @@ import android.widget.Button;
 public class StudentHomeActivity extends ActionBarActivity implements View.OnClickListener
 {
 
-    private Button apply;
+    private
+    Button apply;
     private Button editDetails;
     private Button status;
     private String emailId;

@@ -17,6 +17,39 @@
 <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
 <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
 <![endif]-->
+
+<!-- start vincent script-->
+
+<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.11.2/jquery.min.js"></script>
+    <script>
+      
+
+      function makeRequest() 
+      { // delete the student word below and then check
+        gapi.client.allocationStatusApi.testHostel().execute(); 
+      }
+
+      function init() {
+	  // This the root for the appengine
+        var ROOT = 'https://concise-lambda-87311.appspot.com/_ah/api';
+		gapi.client.load('allocationStatusApi', 'v1', function()
+		 {
+			makeRequest();
+		}, ROOT);
+      }
+    </script>
+    <script src="https://apis.google.com/js/client.js?onload=init"></script>
+
+
+<!-- finish vincent script-->
+
+
+
+
+
+
+
+
 </head>
 <body>
 <div id="wrapper">
@@ -28,7 +61,6 @@
 <a href="#">
 IIIT-D HOSTEL ALLOCATION
 </a>
-</li>
 <li>
 <a href="displayStudents.html">Show All Students</a>
 </li>
@@ -36,7 +68,7 @@ IIIT-D HOSTEL ALLOCATION
 <a href="allocation.html">Allocate Rooms</a>
 </li>
 <li>
-<a href="#">Allocation Details</a>
+<a href="allocation_details.html">Allocation Details</a>
 </li>
 
 <li>
@@ -87,6 +119,41 @@ IIIT-D HOSTEL ALLOCATION
         </tr>
     </tbody>
 </table>
+
+<!-- start vincent script-->
+
+<!--<button onclick="myFunction()">Click me</button> -->
+
+<p id="demo"></p>
+
+<script>
+function myFunction() {
+alert('inserting new element');
+    gapi.client.studentApi.insertStudent({
+ "itemId": 421,
+ "quantity": 3,
+ "what": "odomos1",
+ "who": "anurag"
+}).execute(function(resp) {
+        console.log(resp);
+    });
+}
+</script>
+
+<div id="ul">
+
+</div>
+
+<ul id="vikas">
+
+</ul>
+
+
+
+
+
+
+
 </div>
 </div>
 </div>
