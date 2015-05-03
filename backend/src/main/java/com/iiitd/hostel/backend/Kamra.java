@@ -11,24 +11,26 @@ import com.googlecode.objectify.annotation.Index;
  * Created by irani_r on 8/25/2014.
  */
 @Entity
-public class AllocationStatus {
+public class Kamra {
     @Id
     Long id;
-    @Index
-    String emailId;
-    Integer roomNumber;
-    String wing;
     Integer floor;
+    String hostelType;
+    Integer roomNumber;
+    String roomType;
+    String wing;
+    @Index
+    Boolean status;
 
-    public Integer getFloor() {
-        return floor;
+    public Boolean getStatus() {
+        return status;
     }
 
-    public void setFloor(Integer floor) {
-        this.floor = floor;
+    public void setStatus(Boolean status) {
+        this.status = status;
     }
 
-    public AllocationStatus() {}
+    public Kamra() {}
 
     public Long getId() {
         return id;
@@ -38,12 +40,20 @@ public class AllocationStatus {
         this.id = id;
     }
 
-    public String getEmailId() {
-        return emailId;
+    public Integer getFloor() {
+        return floor;
     }
 
-    public void setEmailId(String emailId) {
-        this.emailId = emailId;
+    public void setFloor(Integer floor) {
+        this.floor = floor;
+    }
+
+    public String getHostelType() {
+        return hostelType;
+    }
+
+    public void setHostelType(String hostelType) {
+        this.hostelType = hostelType;
     }
 
     public Integer getRoomNumber() {
@@ -52,6 +62,14 @@ public class AllocationStatus {
 
     public void setRoomNumber(Integer roomNumber) {
         this.roomNumber = roomNumber;
+    }
+
+    public String getRoomType() {
+        return roomType;
+    }
+
+    public void setRoomType(String roomType) {
+        this.roomType = roomType;
     }
 
     public String getWing() {

@@ -20,9 +20,7 @@ import java.net.MalformedURLException;
 import java.net.URL;
 import java.util.List;
 
-/**
- * Created by vince on 4/28/2015.
- */
+
 public class StudentConnector {
     private static StudentApi myApiService = null;
 

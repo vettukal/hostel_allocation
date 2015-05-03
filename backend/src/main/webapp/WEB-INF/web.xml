@@ -16,7 +16,9 @@
             <param-value>com.iiitd.hostel.backend.MyEndpoint,
                 com.iiitd.hostel.backend.QuoteEndpoint, com.iiitd.hostel.backend.StudentEndpoint,
                 com.iiitd.hostel.backend.RoomEndpoint,
-                com.iiitd.hostel.backend.AllocationStatusEndpoint</param-value>
+                com.iiitd.hostel.backend.AllocationStatusEndpoint,
+                com.iiitd.hostel.backend.AllocateEndpoint, com.iiitd.hostel.backend.KamraEndpoint
+                </param-value>
         </init-param>
     </servlet>
     <servlet-mapping>
